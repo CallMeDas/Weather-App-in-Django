@@ -6,7 +6,12 @@
     <title>Document</title>
 </head>
 <body>
-    hello
+    
+    <form action="POST">
+        {% csrf_token %}
+        <input type="text" name="city" placeholder="Enter City">
+        <button type="submit">Search</button>
+    </form>
     
 </body>
 </html>
