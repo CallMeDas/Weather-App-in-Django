@@ -1,29 +1,36 @@
 from django.shortcuts import render
 import datetime
+import requests
 
 # Create your views here.
 
+import requests
+from django.shortcuts import render
+import datetime
+
 def home(request):
-    if 'city' in request.POST:
-        city = request.POST['city']
-    else:
-        city = 'kathmandu'
-
+    city = 'kathmandu'
+    
+    if request.method == 'POST':
+        city = request.POST.get('city', 'kathmandu')
+    
     url = f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid=0a4e944ce1a6cf3f9a709eb8d4838501'
-    PARAMS = {'units' : 'metric'}
+    params = {'units': 'metric'}
 
-    data = request.get(url, PARAMS).json()
-    description = data['weather'][0]['description']
-    icon = data['weather'][0]['icon']
-    temp =data['main']['temp']
-    day = datetime.date.today()
+    response = requests.get(url, params=params).json()
+    
+    if response['cod'] == 200:
+        cont = {
+            'description': response['weather'][0]['description'],
+            'icon': response['weather'][0]['icon'],
+            'temp': response['main']['temp'],
+            'day': datetime.date.today(),
+            'city': response['name'],
+        }
+    else:
+        cont = {
+            'error': "City not found.",
+            'day': datetime.date.today(),
+        }
 
-    cont = {
-        'description': description,
-        'icon': icon,
-        'temp': temp,
-        'day' : day
-    }
-
-
-    return render(request,'index.html', cont)
+    return render(request, 'index.html', cont)
