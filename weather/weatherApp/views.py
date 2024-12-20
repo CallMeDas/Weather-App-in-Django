@@ -4,10 +4,6 @@ import requests
 
 # Create your views here.
 
-import requests
-from django.shortcuts import render
-import datetime
-
 def home(request):
     city = 'kathmandu'
     
