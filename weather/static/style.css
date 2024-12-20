@@ -10,15 +10,26 @@
 /* body{
     background: linear-gradient(270deg, var(--blue-1), var(--blue-2));
 } */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 html, body {
-    height: 80lvh;
-    margin: 0;
-    padding: 0;
-    font-family: "Poppins", sans-serif;
-    background-image: url('https://images.pexels.com/photos/3008509/pexels-photo-3008509.jpeg?auto=compress&cs=tinysrgb&w=1600');
-    background-size: cover; 
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
 }
 
 
@@ -49,13 +60,13 @@ form{
 }
 input, .btn ::placeholder{
   background-color: transparent;
-  
-    /* color: var(--off-white);
-    border-bottom: 2px solid var(--transp-white-1);   */ 
   padding: .5rem;
   border-radius: 10px;
   outline: none;
   border: 1px solid white;
+}
+input::placeholder{
+  color: black;
 }
 .btn{
   padding: .5rem 1rem;
